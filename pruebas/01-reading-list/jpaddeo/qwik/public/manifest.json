@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "rading-list-challenge",
+  "short_name": "Reading List Challenge",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "A book's reading list challenge proposed by Miguel Ángel Durán (@midudev)."
+}
