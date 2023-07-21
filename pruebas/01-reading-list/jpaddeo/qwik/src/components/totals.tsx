@@ -1,14 +1,13 @@
-import { component$, useContext } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 
-import { BookListContext } from '~/contexts/book-list-context';
-import { ReadingListContext } from '~/contexts/reading-list-context';
+import { useGlobalLibraryState } from '~/contexts/library-context';
 
 export const Totals = component$(() => {
-  const { books } = useContext(BookListContext);
-  const { readingList } = useContext(ReadingListContext);
+  const { books, readingList } = useGlobalLibraryState();
+
   return (
     <h1>
-      {readingList.length}/{books.length}
+      {readingList.value.length}/{books.value.length}
     </h1>
   );
 });

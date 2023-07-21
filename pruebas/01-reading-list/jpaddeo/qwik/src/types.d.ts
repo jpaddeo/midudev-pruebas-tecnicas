@@ -13,3 +13,8 @@ export type Book = {
   ISBN: string;
   author: Author;
 };
+
+export type BookWithSettings = Book & {
+  isInReadingList: boolean;
+  isFavorite: boolean;
+};
