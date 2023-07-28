@@ -2,7 +2,7 @@ import { component$ } from '@builder.io/qwik';
 
 import { useGlobalLibraryState } from '~/contexts/library-context';
 
-export const Totals = component$(() => {
+export default component$(() => {
   const { books, readingList } = useGlobalLibraryState();
 
   return (

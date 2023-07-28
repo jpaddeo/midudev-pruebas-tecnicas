@@ -7,13 +7,13 @@ import {
 
 import { useProvideLibraryState } from '~/contexts/library-context';
 
-import { RouterHead } from '~/components/router-head';
+import RouterHead from '~/components/router-head';
 
 import '~/global.css';
 
 export default component$(() => {
   useProvideLibraryState();
-  
+
   return (
     <QwikCityProvider>
       <head>
