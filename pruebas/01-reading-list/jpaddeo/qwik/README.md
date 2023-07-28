@@ -20,6 +20,10 @@ El proyecto cuenta con la siguiente estructura de carpetas:
 └── src/
     ├── components/
     │   └── ...
+    ├── contexts/
+    │   └── ...
+    ├── libs/
+    │   └── ...
     └── routes/
         └── ...
 ```
@@ -27,6 +31,8 @@ El proyecto cuenta con la siguiente estructura de carpetas:
 - `src/routes`: rutas basadas en carpetas que pueden heredar el layout de los archivos `layout.tsx` y tienen un `index.tsx` como archivo de la páginas. Para más información, se recomienda leer [documentación de rutas](https://qwik.builder.io/qwikcity/routing/overview/).
 
 - `src/components`: carpeta de componentes reutilizables de la aplicación.
+
+- `src/contexts`: carpeta que contiene definición de estados globales y contexto de la aplicación.
 
 - `public`: contenido estático, como p.e. imágenes, favicon, etcétera. Para más información, se recomienda leer [carpeta public vitejs](https://vitejs.dev/guide/assets.html#the-public-directory).
 
