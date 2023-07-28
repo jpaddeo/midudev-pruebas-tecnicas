@@ -4,10 +4,10 @@ import { useGlobalLibraryState } from '~/contexts/library-context';
 
 import BookCard from '~/components/book-card';
 
-export const ReadingList = component$(() => {
+export default component$(() => {
   const { readingList } = useGlobalLibraryState();
   return (
-    <section class='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4 py-8'>
+    <section class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 px-4 py-8 w-full'>
       {readingList.value.map((book) => (
         <BookCard key={book.ISBN} book={book} />
       ))}

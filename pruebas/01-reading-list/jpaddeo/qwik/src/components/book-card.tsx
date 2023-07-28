@@ -1,5 +1,6 @@
 import { component$, $ } from '@builder.io/qwik';
 import { Image } from '@unpic/qwik';
+
 import { useGlobalLibraryState } from '~/contexts/library-context';
 
 import type { Book } from '~/types';
@@ -18,49 +19,21 @@ export default component$(({ book }: BookProps) => {
   });
 
   return (
-    <div
-      class={`relative block mx-[5%] my-auto rounded-lsm bg-[url("${book.cover}")] shadow-lg shadow-gray-500 transform-all duration-75 hover:rotate-3d`}
-    >
-      <div class='book'>
-        <div class='front'>
-          <div class='cover'>
-            <Image
-              src={book.cover}
-              layout='responsive'
-              alt={book.title}
-              width={120}
-              aspectRatio={2 / 3}
-            />
-          </div>
-        </div>
-        <div class='left-side'>
-          <h2>
-            <span>George Orwell</span>
-            <span>1984</span>
-          </h2>
-        </div>
-      </div>
-    </div>
-  );
-  return (
     <article
-      key={book.ISBN}
+      class={` ${
+        readingList.value.find((b) => b.ISBN === book.ISBN)
+          ? 'outline-2 outline-yellow-300 outline w-[180] h-[255]'
+          : 'book'
+      } flex items-center justify-center`}
       onClick$={() => toogleToReadingList(book)}
-      class={`border-2 border-black py-2 hover:bg-gray-200 hover:cursor-pointer bg-white shadow rounded-lg justify-center items-center flex flex-col ${
-        readingList.value.find((b) => b.ISBN === book.ISBN) ? 'bg-gray-800' : ''
-      }`}
     >
       <Image
         src={book.cover}
         layout='responsive'
         alt={book.title}
-        width={120}
+        width={180}
         aspectRatio={2 / 3}
       />
-      <h1 class='text-base font-semibold truncate' title={book.title}>
-        {book.title}
-      </h1>
-      <p class='text-sm text-gray-400'>{book.author.name}</p>
     </article>
   );
 });
