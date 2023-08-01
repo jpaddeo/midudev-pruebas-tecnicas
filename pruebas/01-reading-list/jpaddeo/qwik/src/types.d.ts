@@ -16,5 +16,16 @@ export type Book = {
 
 export type BookWithSettings = Book & {
   isInReadingList: boolean;
-  isFavorite: boolean;
+};
+
+export type Library = {
+  books: Signal<BookWithSettings[]>;
+  genres: string[];
+  readingList: Signal<Book[]>;
+};
+
+export type Filters = {
+  genre: string;
+  pages: number;
+  search: string;
 };

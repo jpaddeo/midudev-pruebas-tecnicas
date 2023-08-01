@@ -5,14 +5,14 @@ import {
   ServiceWorkerRegister,
 } from '@builder.io/qwik-city';
 
-import { useProvideLibraryState } from '~/contexts/library-context';
+import { useProvideAppState } from '~/context/app-context';
 
 import RouterHead from '~/components/router-head';
 
 import '~/global.css';
 
 export default component$(() => {
-  useProvideLibraryState();
+  useProvideAppState();
 
   return (
     <QwikCityProvider>

@@ -1,28 +1,21 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
-import { type BookWithSettings } from '~/types';
-
 import { useGlobalAppState } from '~/context/app-context';
 
-import BookCard from '~/components/book-card';
+import ReadingList from '~/components/reading-list';
 
 export default component$(() => {
   const { library } = useGlobalAppState();
-
   return (
-    <div class='flex flex-col p-8 bg-white dark:bg-gray-900'>
-      <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-4'>
-        {library.books.map((book: BookWithSettings) => (
-          <BookCard key={book.ISBN} book={book} />
-        ))}
-      </div>
+    <div class='flex flex-col p-8 bg-white dark:bg-gray-900 min-h-screen'>
+      {library.readingList.length > 0 && <ReadingList />}
     </div>
   );
 });
 
 export const head: DocumentHead = {
-  title: 'JPA Books | Inicio',
+  title: 'JPA Books | Reading List',
   meta: [
     {
       name: 'description',
