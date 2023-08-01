@@ -1,4 +1,4 @@
-import type { Book } from '~/types';
+import type { Book, Filters } from '~/types';
 
 import libraryData from '~/books.json';
 
@@ -15,15 +15,31 @@ const mapBookFromApi = ({ book }: any) => ({
 
 export const api = {
   books: {
-    list: async () => {
+    list: async (filters?: Filters) => {
       const books: Book[] = await libraryData.library.map(mapBookFromApi);
+      if (
+        filters &&
+        (filters.search.length || filters.genre.length || filters.pages > 0)
+      ) {
+        return books.filter((book) => {
+          const isGenreMatch =
+            !filters.genre.length || book.genre === filters.genre;
+          const isSearchMatch =
+            !filters.search.length ||
+            book.title.toLowerCase().includes(filters.search.toLowerCase());
+          const isPagesMatch = !filters.pages || book.pages <= filters.pages;
+          return isGenreMatch && isSearchMatch && isPagesMatch;
+        });
+      }
       return books;
     },
-    filter: async (genre: string) => {
-      const filteredBooks: Book[] = await libraryData.library
-        .filter(({ book }) => book.genre === genre)
-        .map(mapBookFromApi);
-      return filteredBooks;
+    genres: async () => {
+      const books: Book[] = await libraryData.library.map(mapBookFromApi);
+      return Array.from(new Set(books.map(({ genre }) => genre)));
+    },
+    maxPages: async () => {
+      const books: Book[] = await libraryData.library.map(mapBookFromApi);
+      return Math.max(...books.map(({ pages }) => pages));
     },
   },
 };
