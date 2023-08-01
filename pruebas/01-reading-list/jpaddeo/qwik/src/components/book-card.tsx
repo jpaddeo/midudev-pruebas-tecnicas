@@ -1,30 +1,31 @@
 import { component$, $ } from '@builder.io/qwik';
 import { Image } from '@unpic/qwik';
 
-import { useGlobalLibraryState } from '~/contexts/library-context';
+import { type BookWithSettings } from '~/types';
 
-import type { Book } from '~/types';
+import { useGlobalAppState } from '~/context/app-context';
 
 type BookProps = {
-  book: Book;
+  book: BookWithSettings;
 };
 
 export default component$(({ book }: BookProps) => {
-  const { readingList, booksWithSettings } = useGlobalLibraryState();
+  const { library } = useGlobalAppState();
+  const { readingList, books } = library;
 
-  const toogleToReadingList = $((book: Book) => {
-    booksWithSettings.value = booksWithSettings.value.map((b) =>
+  const toogleToReadingList = $((book: BookWithSettings) => {
+    books.value = books.map((b: BookWithSettings) =>
       b.ISBN === book.ISBN ? { ...b, isInReadingList: !b.isInReadingList } : b
     );
   });
 
   return (
     <article
-      class={` ${
-        readingList.value.find((b) => b.ISBN === book.ISBN)
-          ? 'outline-2 outline-yellow-300 outline w-[180] h-[255]'
+      class={`${
+        readingList.find((b: BookWithSettings) => b.ISBN === book.ISBN)
+          ? 'border-2 border-yellow-400'
           : 'book'
-      } flex items-center justify-center`}
+      }`}
       onClick$={() => toogleToReadingList(book)}
     >
       <Image
